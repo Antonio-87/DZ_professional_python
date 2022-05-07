@@ -40,6 +40,7 @@ def format_number(contacts_list):
 
 def merge_duplicates(contacts_list):
     for i in contacts_list:
+        contacts_list_updated = []
         for j in contacts_list:
             if i[0] == j[0] and i[1] == j[1] and i is not j:
                 if i[2] == '':
@@ -51,10 +52,9 @@ def merge_duplicates(contacts_list):
                 if i[5] == '':
                     i[5] = j[5]
                 if i[6] == '':
-                    i[6] = j[6]
-    contacts_list_updated = []
+                    i[6] = j[6]          
     for rows in contacts_list:
-        if rows not in contacts_list_updated:
+        if rows not in contacts_list_updated and len(rows) < 8:
             contacts_list_updated.append(rows)
     return contacts_list_updated
 
