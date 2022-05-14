@@ -29,22 +29,13 @@ class FlatIterator_any:
         self.start = -1
         self.end = len(self.flat_list)
         return self
-
-    def flattan(self, nested_list):
-        for l in nested_list:
-            for i in l:
-                yield i
+      
 
     def __next__(self):
         self.start += 1
         if self.start == self.end:
             raise StopIteration
-        if self.flat_list[self.start] != list:
-            return self.flat_list[self.start]
-        for i in self.flat_list[self.start]:
-            for x in i:
-                if x == 'bool':
-                    return x
-            return x     
+        if isinstance(self.flat_list[self.start], list):
+            for x in self.flat_list[self.start]:
+                return x
         return self.flat_list[self.start]
-    
