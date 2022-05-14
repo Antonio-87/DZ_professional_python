@@ -11,12 +11,9 @@ if __name__ == '__main__':
     print('Задание №2')
     for item in flat_generator(nested_list):
         print(item)
-    print('Задание №3 - не получается')
+    print('Задание №3')
     for item in FlatIterator_any(nested_list_any):
         print(item)
     print('Задание №4')
     for item in flat_generator_any(nested_list_any):
-        print(item)
-    
-    
-        
+        print(item)     
