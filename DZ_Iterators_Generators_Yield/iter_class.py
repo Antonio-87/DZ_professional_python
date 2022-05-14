@@ -1,7 +1,3 @@
-from matplotlib.cbook import flatten
-from generator import flat_generator
-
-
 class FlatIterator:
     def __init__(self, nested_list):
         self.flat_list = sum(nested_list, [])
