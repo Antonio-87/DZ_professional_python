@@ -62,16 +62,3 @@ class TestSomething:
 
 if __name__ == '__main__':
     pytest.main()
-
-# def get_presenc_downloaded_folder():
-#         upload_url = "https://cloud-api.yandex.net/v1/disk/resources"
-#         headers = {
-#             'Content-Type': 'application/json',
-#             'Authorization': 'OAuth {}'.format(token)
-#         }
-#         params = {"path": 'Test'}
-#         response = requests.get(upload_url,  headers=headers, params=params)
-#         response_body = response.json()
-#         print(response_body)
-
-# get_presenc_downloaded_folder()
