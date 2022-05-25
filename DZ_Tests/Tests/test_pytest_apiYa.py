@@ -2,9 +2,10 @@ from urllib import response
 import pytest
 import requests
 
-token = 'AQAAAAAWC2sDAADLW0SVBXklZ0hIh-Eo0UNuDZw'
 
-class TestSomething:    
+
+class TestSomething:
+    token = ''
     disk_file_path = 'Test'
     def setup(self):
         print("method setup")
@@ -22,7 +23,7 @@ class TestSomething:
         upload_url = "https://cloud-api.yandex.net/v1/disk/resources"
         headers = {
             'Content-Type': 'application/json',
-            'Authorization': 'OAuth {}'.format(token)
+            'Authorization': 'OAuth {}'.format(self.token)
         }
         params = {"path": self.disk_file_path}
 
@@ -38,7 +39,7 @@ class TestSomething:
         upload_url = "https://cloud-api.yandex.net/v1/disk/resources"
         headers = {
             'Content-Type': 'application/json',
-            'Authorization': 'OAuth {}'.format(token)
+            'Authorization': 'OAuth {}'.format(self.token)
         }
         params = {"path": self.disk_file_path}
         response = requests.get(upload_url,  headers=headers, params=params)
@@ -48,17 +49,34 @@ class TestSomething:
 
     def test_folder_already_disk(self):
         '''
-        Проверяем, что папка с заданным именем уже существует
+        Проверяем, что нельзя создать папку с именем,
+        которое уже существует.
         '''
         upload_url = "https://cloud-api.yandex.net/v1/disk/resources"
         headers = {
             'Content-Type': 'application/json',
-            'Authorization': 'OAuth {}'.format(token)
+            'Authorization': 'OAuth {}'.format(self.token)
         }
         params = {"path": self.disk_file_path}
 
         response = requests.put(upload_url, headers=headers, params=params)
         assert response.status_code == 409
+
+
+    def test_folder_delete_disk(self):
+        '''
+        Удаляем созданную папку.
+        Проверяем, что удалена.
+        '''
+        upload_url = "https://cloud-api.yandex.net/v1/disk/resources"
+        headers = {
+            'Content-Type': 'application/json',
+            'Authorization': 'OAuth {}'.format(self.token)
+        }
+        params = {"path": self.disk_file_path, "permanently": True}
+
+        response = requests.delete(upload_url, headers=headers, params=params)
+        assert response.status_code == 204
 
 if __name__ == '__main__':
     pytest.main()
